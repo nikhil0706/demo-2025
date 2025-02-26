@@ -6,6 +6,26 @@ on:
       - main  # Change this to your default branch
 
 jobs:
+  code-scan:
+    name: Run CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write  # Required for uploading scan results
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python  # Change based on your project (e.g., "javascript", "java", "go", etc.)
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        
   push-to-ecr:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
