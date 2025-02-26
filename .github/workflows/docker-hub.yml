@@ -52,4 +52,6 @@ jobs:
           docker push $IMAGE_URI:latest
           docker push $IMAGE_URI:${{ github.sha }}
           
-    
+      - name: 
+        run: echo "Image pushed to: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}"
+
